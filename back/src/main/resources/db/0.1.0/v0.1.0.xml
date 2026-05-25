@@ -8,27 +8,27 @@
     <changeSet id="STA-1-create-athentication-tables" author="hammamio">
 
         <createTable tableName="ath_user">
-            <column name="ath_id" type="BIGINT">
+            <column name="ath_id" type="BIGSERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_ath_user"/>
             </column>
 
-            <column name="ath_first_name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="ath_first_name" type="VARCHAR(100)"/>
 
-            <column name="ath_last_name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="ath_last_name" type="VARCHAR(100)"/>
 
             <column name="ath_email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="ath_active" type="BOOLEAN">
+            <column name="ath_active" type="BOOLEAN" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="ath_phone_number" type="BIGINT">
+            <column name="ath_phone_number" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ath_password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
 
@@ -50,7 +50,7 @@
         </createTable>
 
         <createTable tableName="ath_user_role">
-            <column name="aur_id" type="BIGINT">
+            <column name="aur_id" type="BIGSERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 

@@ -1,15 +1,13 @@
-package com.startup.back.infrastructure;
+package com.startup.back.infrastructure.database.config;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.auditing.CurrentDateTimeProvider;
 import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.sql.DataSource;
@@ -29,10 +27,10 @@ public class DatabaseConfig {
 
     @Bean
     public AuditorAware<String> auditorAware() {
-        return () -> Optional.of(SecurityContextHolder.getContext())
-                .map(SecurityContext::getAuthentication)
-                .map(Authentication::getPrincipal)
-                .map(String.class::cast);
+        return () -> Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+                .filter(Authentication::isAuthenticated)
+                .map(Authentication::getName)
+                .or(() -> Optional.of("system"));
     }
 
     @Bean
