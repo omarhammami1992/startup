@@ -1,0 +1,45 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+/.idea
+/.junie
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.iws
+*.iml
+*.ipr
+.idea/*
+# compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# dependencies
+/node_modules
+
+# misc
+/.angular/cache
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="STA-1-create-athentication-tables" author="hammamio">
+
+        <createTable tableName="ath_user">
+            <column name="ath_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_ath_user"/>
+            </column>
+
+            <column name="ath_first_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ath_last_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ath_email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="ath_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ath_phone_number" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_by" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_by" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ath_user_role">
+            <column name="aur_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="aur_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="aur_user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="ath_user_role"
+                baseColumnNames="aur_user_id"
+                constraintName="fk_ath_user_role_user"
+                referencedTableName="ath_user"
+                referencedColumnNames="ath_id"
+                onDelete="CASCADE"/>
+
+    </changeSet>
+
+</databaseChangeLog>
